@@ -13,7 +13,7 @@ async function categorizeSearches(req, res) {
         text = text.replace('\`\`\`json', '')
         text = text.replace('\`\`\`', '')
         let results = JSON.parse(text);
-        return res.status(200).response(results)
+        return res.status(200).json({response: results})
     }
     catch (error) {
         console.log('Internal Server Error: ', error);

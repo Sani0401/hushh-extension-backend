@@ -8,7 +8,7 @@ const router = express.Router();
 
 // API's for Gemini Processing
 router.post('/getCategory', functions.getCategory);
-// router.post('/categorizeSearches', categorizeSearches)
+router.post('/categorizeSearches', functions.categorizeSearches)
 
 //API's for Supabase Processing.
 router.post('/insertWebsiteData',functions.insertProductData);

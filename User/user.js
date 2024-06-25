@@ -11,7 +11,7 @@ router.post('/getCategory', functions.getCategory);
 // router.post('/categorizeSearches', categorizeSearches)
 
 //API's for Supabase Processing.
-router.post('/insertWebsiteData',functions.insertProductData);
+router.post('/insertProductData',functions.insertProductData);
 router.post('/insertIntoCollection', functions.createNewCollection)
 router.post('/insertBrowsingBehaviour', functions.insertBrowsingBehaviour)
 

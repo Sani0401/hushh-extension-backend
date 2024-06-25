@@ -1,25 +1,13 @@
 import supabase from "../config/supabaseConfig.js";
-
+import base64ToObject from "../minor_Services/base64ToObject.js";
 async function insertProductData(req, res) {
-  const { userData, productData } = req.body;
-  console.log("This is the user data: ", productData);
-  const userId = userData.data.user.id;
-  const brandName = productData.brand;
-  console.log("Request received...");
-  const { data, error } = await supabase.auth.admin.getUserById(userId);
-  if (error && error.status == 404 && error.code == "validation_failed") {
-    console.log("Error while checking user with userID: ", error);
-    return res
-      .status(404)
-      .json({ message: "Invalid User ID, please check", status: 404 });
-  }
-  if (error && error.status == 404 && error.code == "user_not_found") {
-    console.log("Error while checking user with userID: ", error);
-    return res.status(404).json({
-      message: "User not found, please create an account",
-      status: 404,
-    });
-  }
+  const { productData } = req.body;
+  const decryptedObject = base64ToObject(productData);
+
+  const productdetails = decryptedObject.productData;
+const userID = decryptedObject.userID;
+  const brandName = productdetails.brand;
+
   const { data: brandCheckData, error: brandCheckError } = await supabase
     .from("brands")
     .select()
@@ -34,7 +22,7 @@ async function insertProductData(req, res) {
   }
 
   if (brandCheckData.length === 0) {
-    const brandCategory = productData.category;
+    const brandCategory = productdetails.category;
     const { error: brandInsertError } = await supabase.from("brands").insert({
       brand_name: brandName,
       brand_category: brandCategory,
@@ -50,15 +38,15 @@ async function insertProductData(req, res) {
   }
 
   const { error: productInsertError } = await supabase.from("products").insert({
-    product_url: productData.linkUrl,
-    product_title: productData.productTitle,
-    image_url: productData.srcUrl,
-    description: productData.productTitle,
-    product_page_url: productData.pageUrl,
-    brand_name: productData.brand,
-    price: productData.price,
-    product_category: productData.category,
-    user_id: userId,
+    product_url: productdetails.linkUrl,
+    product_title: productdetails.productTitle,
+    image_url: productdetails.srcUrl,
+    description: productdetails.productTitle,
+    product_page_url: productdetails.pageUrl,
+    brand_name: productdetails.brand,
+    price: productdetails.price,
+    product_category: productdetails.category,
+    user_id: userID,
   });
 
   if (productInsertError) {

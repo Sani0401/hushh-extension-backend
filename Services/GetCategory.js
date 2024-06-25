@@ -32,7 +32,7 @@ async function getCategory(req, res) {
 
     if (type == 1) {
       const genAI = new GoogleGenerativeAI(API_KEY);
-      const model = await genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+      const model = await genAI.getGenerativeModel({ model: "gemini-1.0-pro" }); //chainging the model
 
       const prompt = `${linkUrl} ${query_type1}`;
 

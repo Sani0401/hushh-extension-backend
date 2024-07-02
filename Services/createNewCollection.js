@@ -29,6 +29,7 @@ async function createNewCollection(req, res) {
     }
     else{
         console.log('Collections created');
+        return res.status(200).json({message:"User Collection Created", status : 1})
     }
   } catch (error) {
     console.log(error);

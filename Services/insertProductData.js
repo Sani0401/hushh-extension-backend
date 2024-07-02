@@ -17,8 +17,8 @@ const userID = decryptedObject.userID;
     console.log("Cannot find the brand name in the table");
     console.log(brandCheckError);
     return res
-      .status(500)
-      .json({ message: "Internal Server Error", error: brandCheckError });
+      .status(400)
+      .json({ message: "Cannot find the brand name", error: brandCheckError });
   }
 
   if (brandCheckData.length === 0) {

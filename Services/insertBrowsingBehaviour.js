@@ -50,7 +50,7 @@ async function insertBrowsingBehaviour(req, res) {
           .status(500)
           .json({ message: "Error updating the behaviour data", error: updateError });
       } else {
-        return res.status(201).json({ message: "User behaviour data updated" });
+        return res.status(200).json({ message: "User behaviour data updated" });
       }
     } else {
       const { error: insertError } = await supabase

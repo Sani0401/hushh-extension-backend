@@ -201,3 +201,57 @@
 
 ```{response: results} ```
 
+### 5. Send OTP
+
+**Endpoint**: `/sendOTP`
+
+**Method:** `POST`
+
+**Description:** 
+- Sends a 6 digit OTP on the mail to verify it.
+
+**Request Body:**
+
+- This is the main body data
+```json
+  {
+  email: testUser@gmail.com
+  }
+```
+
+**Response**
+
+- #### 200 OK
+```{ message: "OTP sent successfully", status: 1 } ```
+
+- #### 500 Internal Server Error
+``` { message: "Failed to send OTP", status : -1 }```
+
+
+### 6. Verify OTP
+
+**Endpoint**: `/verifyOTP`
+
+**Method:** `POST`
+
+**Description:** 
+- This verifies the OTP sent on the email.
+
+**Request Body:**
+
+- This is the main body data
+```json
+  {
+  email: testUser@gmail.com
+  otp: 123456
+  }
+```
+
+**Response**
+
+- #### 200 OK
+```{ message: "OTP verified successfully", status : 1 } ```
+- #### 400 Unauthorized Access
+ ``` { message: "Invalid OTP", status : 0 }``` 
+- #### 500 Internal Server Error
+``` { message: "Failed to verify OTP", status : -1 }```

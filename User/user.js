@@ -15,4 +15,7 @@ router.post('/insertProductData',functions.insertProductData);
 router.post('/insertIntoCollection', functions.createNewCollection)
 router.post('/insertBrowsingBehaviour', functions.insertBrowsingBehaviour)
 
+router.post('/sendOTP', functions.sendOTP);
+router.post('/verifyOTP', functions.verifyOTP)
+
 export { router as user };
